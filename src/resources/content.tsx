@@ -142,27 +142,31 @@ const about: About = {
     institutions: [
       {
         name: "University of Pisa — MSc in Philosophy and Forms of Knowledge",
-        description: <>Nov 2022 - Present. Focus on Identity, Consciousness and Philosophy of Mind.</>,
+        timeframe: "Nov 2022 - Present",
+        description: <>Focus on Identity, Consciousness and Philosophy of Mind.</>,
       },
       {
         name: "Universität Heidelberg — Erasmus+ Exchange",
-        description: <>Sep 2023 - Mar 2024. Courses in Philosophy, Transcultural Studies and German.</>,
+        timeframe: "Sep 2023 - Mar 2024",
+        description: <>Courses in Philosophy, Transcultural Studies and German.</>,
       },
       {
         name: "University of Pisa — BA in Philosophy",
+        timeframe: "Sep 2019 - Nov 2022",
         description: (
           <>
-            Sep 2019 - Nov 2022. Graduated 110/110 cum Laude. Thesis: "Embodied Self and Narrative
-            Identity. Ricœur in Dialogue with Enactivism."
+            Graduated 110/110 cum Laude. Thesis: "Embodied Self and Narrative Identity. Ricœur in
+            Dialogue with Enactivism."
           </>
         ),
       },
       {
         name: "Licei G. Mazzini, Locri — Human Sciences High School (Economic-Social)",
+        timeframe: "Sep 2014 - Jul 2019",
         description: (
           <>
-            Sep 2014 - Jul 2019. Graduated 100/100 cum Laude. Student representative at the
-            Provincial Student Council and member of the school's Internal Guarantee Body.
+            Graduated 100/100 cum Laude. Student representative at the Provincial Student Council
+            and member of the school's Internal Guarantee Body.
           </>
         ),
       },

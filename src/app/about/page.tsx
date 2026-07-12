@@ -269,10 +269,17 @@ export default function About() {
               <Column fillWidth gap="l" marginBottom="40">
                 {about.studies.institutions.map((institution, index) => (
                   <Column key={`${institution.name}-${index}`} fillWidth gap="4">
-                    <Text id={institution.name} variant="heading-strong-l">
-                      {institution.name}
-                    </Text>
-                    <Text variant="heading-default-xs" onBackground="neutral-weak">
+                    <Row fillWidth horizontal="between" vertical="end">
+                      <Text id={institution.name} variant="heading-strong-l">
+                        {institution.name}
+                      </Text>
+                      {institution.timeframe && (
+                        <Text variant="heading-default-xs" onBackground="neutral-weak">
+                          {institution.timeframe}
+                        </Text>
+                      )}
+                    </Row>
+                    <Text variant="body-default-m" onBackground="neutral-weak">
                       {institution.description}
                     </Text>
                   </Column>
