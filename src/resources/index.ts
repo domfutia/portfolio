@@ -5,6 +5,7 @@ export {
   newsletter,
   home,
   about,
+  esn,
   blog,
   work,
   gallery,

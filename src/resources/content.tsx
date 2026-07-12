@@ -1,34 +1,28 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
+import { About, Blog, Esn, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
 import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
   firstName: "Domenico",
   lastName: "Futia",
   name: `Domenico Futia`,
-  role: "Student",
+  role: "Philosophy Student",
   avatar: "/images/avatar.jpg",
   email: "domenicofutia@hotmail.com",
   location: "Europe/Rome", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["Italian","English", "Spanish", "German"], // optional: Leave the array empty if you don't want to display languages
+  languages: ["Italian", "English", "German", "Spanish"], // optional: Leave the array empty if you don't want to display languages
   locale: "en", // BCP 47 language tag for the HTML lang attribute, e.g., 'en', 'ja', 'zh-TW'
 };
 
 const newsletter: Newsletter = {
-  display: true,
+  display: false,
   title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>My weekly newsletter about creativity and engineering</>,
+  description: <>My occasional newsletter about philosophy, travel and ideas</>,
 };
 
 const social: Social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
   // Set essentials: true for links you want to show on the about page
-  {
-    name: "GitHub",
-    icon: "github",
-    link: "https://github.com/once-ui-system",
-    essential: false,
-  },
   {
     name: "LinkedIn",
     icon: "linkedin",
@@ -40,12 +34,6 @@ const social: Social = [
     icon: "instagram",
     link: "https://www.instagram.com/domfutia/",
     essential: true,
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
-    essential: false,
   },
   {
     name: "Email",
@@ -60,25 +48,25 @@ const home: Home = {
   image: "/images/og/home.jpg",
   label: "Home",
   title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  description: `Portfolio website showcasing my work and experience as a ${person.role}`,
+  headline: <>Bridging philosophy and the world, one experience at a time</>,
   featured: {
-    display: true,
+    display: false,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
+        <strong className="ml-4">ESN Pisa</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
-          Featured work
+          Volunteering
         </Text>
       </Row>
     ),
-    href: "/work/building-once-ui-a-customizable-design-system",
+    href: "/esn",
   },
   subline: (
     <>
       I'm {person.firstName}, a {person.role.toLowerCase()} at{" "}
-      <Text as="span" size="xl" weight="strong">University of Pisa</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
+      <Text as="span" size="xl" weight="strong">University of Pisa</Text>, where I explore identity, consciousness and the philosophy of mind. <br /> Alongside my studies, I work in tourism and volunteer with Erasmus Student Network.
     </>
   ),
 };
@@ -96,7 +84,7 @@ const about: About = {
     display: true,
   },
   calendar: {
-    display: true,
+    display: false,
     link: "https://cal.com",
   },
   intro: {
@@ -104,9 +92,10 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        {person.firstName} is a {person.location.split("/")[1]?.replace("_", " ")}-based {person.role.toLowerCase()} with a passion for transforming complex challenges
-        into simple, elegant design solutions. Their work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        {person.firstName} is a philosophy student and tourism professional based in{" "}
+        {person.location.split("/")[1]?.replace("_", " ")}. Combining the analytical approach of
+        humanistic studies with pragmatism developed in the field, he tackles everyday challenges
+        with a broad perspective, mental flexibility and a fast learning ability.
       </>
     ),
   },
@@ -115,41 +104,32 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Global Cruises LLC",
+        timeframe: "Sep 2024 - Present",
+        role: "Shore Excursions Assistant",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Supporting tour guides during group excursions between Pisa and Florence.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Assisting international visitors and guests with specific needs; managing technical
+            equipment and taking photographs for tourists.
           </>,
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "University of Pisa",
+        timeframe: "Sep 2025 - Feb 2026",
+        role: "Teaching Tutor",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Led weekly study support sessions for students enrolled in the "Introduction to
+            Philosophy of Mind" course.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Clarified theoretical concepts and provided in-depth insights to support exam
+            preparation.
           </>,
         ],
         images: [],
@@ -161,73 +141,113 @@ const about: About = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "University of Pisa — MSc in Philosophy and Forms of Knowledge",
+        description: <>Nov 2022 - Present. Focus on Identity, Consciousness and Philosophy of Mind.</>,
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Universität Heidelberg — Erasmus+ Exchange",
+        description: <>Sep 2023 - Mar 2024. Courses in Philosophy, Transcultural Studies and German.</>,
+      },
+      {
+        name: "University of Pisa — BA in Philosophy",
+        description: (
+          <>
+            Sep 2019 - Nov 2022. Graduated 110/110 cum Laude. Thesis: "Embodied Self and Narrative
+            Identity. Ricœur in Dialogue with Enactivism."
+          </>
+        ),
+      },
+      {
+        name: "Licei G. Mazzini, Locri — Human Sciences High School (Economic-Social)",
+        description: (
+          <>
+            Sep 2014 - Jul 2019. Graduated 100/100 cum Laude. Student representative at the
+            Provincial Student Council and member of the school's Internal Guarantee Body.
+          </>
+        ),
       },
     ],
   },
   technical: {
     display: true, // set to false to hide this section
-    title: "Technical skills",
+    title: "Skills",
     skills: [
       {
-        title: "Figma",
+        title: "Communication & Public Speaking",
         description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
+          <>
+            Strong relational and communication skills, public speaking, event organization,
+            stakeholder management, copywriting and storytelling.
+          </>
+        ),
+        tags: [],
+        images: [],
+      },
+      {
+        title: "Languages",
+        description: (
+          <>Italian (Native), English (Advanced), German (Intermediate), Spanish (Intermediate).</>
+        ),
+        tags: [],
+        images: [],
+      },
+      {
+        title: "Digital Skills",
+        description: (
+          <>Microsoft Office (Intermediate), Google Workspace (Intermediate), Python (Beginner), Canva.</>
         ),
         tags: [
           {
-            name: "Figma",
-            icon: "figma",
+            name: "Python",
+            icon: "javascript",
           },
         ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
+        images: [],
+      },
+    ],
+  },
+};
+
+const esn: Esn = {
+  path: "/esn",
+  label: "ESN",
+  title: `ESN – ${person.name}`,
+  description: `Meet ${person.name}, Vice President @ ESN Pisa | Erasmus Student Network`,
+  avatar: {
+    display: true,
+  },
+  intro: {
+    display: true,
+    title: "Introduction",
+    description: (
+      <>
+        {person.firstName} has been an active member of Erasmus Student Network Pisa - ETS since
+        February 2025, supporting international students throughout their exchange experience and
+        contributing to the association's mission of promoting intercultural exchange and
+        volunteering across Europe.
+      </>
+    ),
+  },
+  roles: {
+    display: true,
+    title: "Roles & Activities",
+    items: [
+      {
+        organization: "Erasmus Student Network Pisa - ETS",
+        timeframe: "Feb 2026 - Jul 2026",
+        role: "Vice President — Board Member",
+        achievements: [
+          <>Active member of the Board of Directors, contributing to the strategic direction of the association.</>,
+          <>Coordinated volunteer activities and events supporting international students in Pisa.</>,
         ],
       },
       {
-        title: "Next.js",
-        description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
-        ),
-        tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
+        organization: "Erasmus Student Network Pisa - ETS",
+        timeframe: "Feb 2025 - Present",
+        role: "Volunteer Member",
+        achievements: [
+          <>Supported the organization of events and initiatives for incoming Erasmus students.</>,
+          <>Contributed to fostering a welcoming and inclusive environment for international students.</>,
         ],
       },
     ],
@@ -237,7 +257,7 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about design and tech...",
+  title: "Writing about philosophy, travel and ideas...",
   description: `Read what ${person.name} has been up to recently`,
   // Create new blog posts by adding a new .mdx file to app/blog/posts
   // All posts will be listed on the /blog route
@@ -245,9 +265,9 @@ const blog: Blog = {
 
 const work: Work = {
   path: "/work",
-  label: "Work",
+  label: "Projects",
   title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
+  description: `Projects and writing by ${person.name}`,
   // Create new project pages by adding a new .mdx file to app/blog/posts
   // All projects will be listed on the /home and /work routes
 };
@@ -257,50 +277,7 @@ const gallery: Gallery = {
   label: "Gallery",
   title: `Photo gallery – ${person.name}`,
   description: `A photo collection by ${person.name}`,
-  // Images by https://lorant.one
-  // These are placeholder images, replace with your own
-  images: [
-    {
-      src: "/images/gallery/horizontal-1.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-4.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-3.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-1.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/vertical-2.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-2.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/horizontal-4.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-3.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-  ],
+  images: [],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+export { person, social, newsletter, home, about, esn, blog, work, gallery };

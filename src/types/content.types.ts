@@ -218,6 +218,45 @@ export interface About extends BasePageConfig {
 }
 
 /**
+ * ESN (Erasmus Student Network) page configuration.
+ * @description Configuration for the ESN page, showcasing volunteering roles and activities within Erasmus Student Network.
+ */
+export interface Esn extends BasePageConfig {
+  /** Avatar section configuration */
+  avatar: {
+    /** Whether to display the avatar */
+    display: boolean;
+  };
+  /** Introduction section */
+  intro: {
+    /** Whether to display the introduction */
+    display: boolean;
+    /** Title of the introduction section */
+    title: string;
+    /** Description of the introduction section */
+    description: React.ReactNode;
+  };
+  /** Roles / activities section */
+  roles: {
+    /** Whether to display the roles section */
+    display: boolean;
+    /** Title for the roles section */
+    title: string;
+    /** List of roles/activities */
+    items: Array<{
+      /** Organization name */
+      organization: string;
+      /** Timeframe of the role */
+      timeframe: string;
+      /** Role or position title */
+      role: string;
+      /** Achievements or responsibilities */
+      achievements: React.ReactNode[];
+    }>;
+  };
+}
+
+/**
  * Blog page configuration.
  * @description Configuration for the Blog page, including metadata and navigation label.
  */
