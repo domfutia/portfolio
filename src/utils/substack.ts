@@ -10,50 +10,96 @@ export interface SubstackPost {
 
 const FEED_URL = "https://domfutia.substack.com/feed";
 
-function extractImage(item: Element): string | null {
-  // 1. <enclosure url="..." type="image/..."/>
-  const enclosure = item.querySelector("enclosure");
-  if (enclosure) {
-    const type = enclosure.getAttribute("type") || "";
-    if (type.startsWith("image")) {
-      const url = enclosure.getAttribute("url");
-      if (url) return url;
-    }
-  }
+/**
+ * Decodes HTML entities in a string without relying on the DOM.
+ * Handles:
+ *  - Named entities: &amp; &quot; &apos; &lt; &gt; &nbsp;
+ *  - Decimal numeric entities: &#224; &#8217;
+ *  - Hex numeric entities: &#x00E0; &#xE0;
+ *
+ * Safe for server-side Next.js (no DOMParser, no dangerouslySetInnerHTML).
+ */
+function decodeHtmlEntities(str: string): string {
+  if (!str) return str;
 
-  // 2. <media:content url="..."/>
-  const mediaContent = item.getElementsByTagNameNS(
-    "http://search.yahoo.com/mrss/",
-    "content"
-  )[0];
-  if (mediaContent) {
-    const url = mediaContent.getAttribute("url");
-    if (url) return url;
-  }
+  // Named entities (most common subset)
+  const named: Record<string, string> = {
+    amp: "&",
+    quot: '"',
+    apos: "'",
+    lt: "<",
+    gt: ">",
+    nbsp: "\u00A0",
+    ndash: "\u2013",
+    mdash: "\u2014",
+    lsquo: "\u2018",
+    rsquo: "\u2019",
+    ldquo: "\u201C",
+    rdquo: "\u201D",
+    hellip: "\u2026",
+    copy: "\u00A9",
+    reg: "\u00AE",
+    trade: "\u2122",
+    euro: "\u20AC",
+    pound: "\u00A3",
+    yen: "\u00A5",
+    cent: "\u00A2",
+    bull: "\u2022",
+    middot: "\u00B7",
+    laquo: "\u00AB",
+    raquo: "\u00BB",
+    iexcl: "\u00A1",
+    iquest: "\u00BF",
+    agrave: "\u00E0",
+    aacute: "\u00E1",
+    acirc: "\u00E2",
+    atilde: "\u00E3",
+    auml: "\u00E4",
+    aring: "\u00E5",
+    egrave: "\u00E8",
+    eacute: "\u00E9",
+    ecirc: "\u00EA",
+    euml: "\u00EB",
+    igrave: "\u00EC",
+    iacute: "\u00ED",
+    icirc: "\u00EE",
+    iuml: "\u00EF",
+    ograve: "\u00F2",
+    oacute: "\u00F3",
+    ocirc: "\u00F4",
+    otilde: "\u00F5",
+    ouml: "\u00F6",
+    ugrave: "\u00F9",
+    uacute: "\u00FA",
+    ucirc: "\u00FB",
+    uuml: "\u00FC",
+    ntilde: "\u00F1",
+    ccedil: "\u00E7",
+    Agrave: "\u00C0",
+    Aacute: "\u00C1",
+    Egrave: "\u00C8",
+    Eacute: "\u00C9",
+    Igrave: "\u00CC",
+    Iacute: "\u00CD",
+    Ograve: "\u00D2",
+    Oacute: "\u00D3",
+    Ugrave: "\u00D9",
+    Uacute: "\u00DA",
+    Ntilde: "\u00D1",
+    Ccedil: "\u00C7",
+  };
 
-  // 3. og:image inside <description> HTML
-  const description = item.querySelector("description");
-  if (description) {
-    const text = description.textContent || "";
-    const ogMatch = text.match(/property=["']og:image["'][^>]*content=["']([^"']+)["']/);
-    if (ogMatch) return ogMatch[1];
-    const contentMatch = text.match(/content=["']([^"']+)["'][^>]*property=["']og:image["']/);
-    if (contentMatch) return contentMatch[1];
-    // img src fallback inside HTML content
-    const imgMatch = text.match(/<img[^>]+src=["']([^"']+)["']/);
-    if (imgMatch) return imgMatch[1];
-  }
-
-  return null;
-}
-
-function detectPaywall(item: Element): boolean {
-  // Substack marks paid posts with <itunes:episodeType>full</itunes:episodeType>
-  // or a paywall marker inside the description. We check description length and keywords.
-  const description = item.querySelector("description")?.textContent || "";
-  const paywallKeywords = ["subscribe to read", "for paid subscribers", "abbonati", "subscribers only"];
-  const lowerDesc = description.toLowerCase();
-  return paywallKeywords.some((kw) => lowerDesc.includes(kw));
+  return str
+    // Hex numeric entities: &#xE0; &#x00E0;
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, hex) =>
+      String.fromCodePoint(parseInt(hex, 16))
+    )
+    // Decimal numeric entities: &#224; &#8217;
+    .replace(/&#([0-9]+);/g, (_, dec) =>
+      String.fromCodePoint(parseInt(dec, 10))
+    )
+    // Named entities
+    .replace(/&([a-zA-Z]+);/g, (match, name) => named[name] ?? match);
 }
 
 function slugFromUrl(url: string): string {
@@ -66,14 +112,13 @@ function slugFromUrl(url: string): string {
   }
 }
 
+/**
+ * Strip HTML tags and normalize whitespace.
+ * NOTE: entities must be decoded BEFORE calling this function.
+ */
 function stripHtml(html: string): string {
   return html
     .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -91,24 +136,34 @@ export async function getSubstackPosts(): Promise<SubstackPost[]> {
 
   const xml = await res.text();
 
-  // Parse using browser-like DOMParser via a lightweight regex approach (Node/Edge compatible)
+  // Parse using regex (Node/Edge compatible — no DOMParser)
   const items = [...xml.matchAll(/<item[\s\S]*?<\/item>/g)].map((m) => m[0]);
 
   const posts: SubstackPost[] = items.map((rawItem) => {
     const get = (tag: string) => {
-      const match = rawItem.match(new RegExp(`<${tag}(?:[^>]*)><!\\[CDATA\\[([\\s\\S]*?)\\]\\]><\/${tag}>|<${tag}(?:[^>]*)>([\\s\\S]*?)<\/${tag}>`, "i"));
+      const match = rawItem.match(
+        new RegExp(
+          `<${tag}(?:[^>]*)><!\\[CDATA\\[([\\s\\S]*?)\\]\\]><\\/${tag}>|<${tag}(?:[^>]*)>([\\s\\S]*?)<\\/${tag}>`,
+          "i"
+        )
+      );
       return match ? (match[1] ?? match[2] ?? "").trim() : "";
     };
 
-    const title = get("title");
+    const rawTitle = get("title");
     const link = get("link") || get("guid");
     const pubDate = get("pubDate");
-    const description = get("description");
-    const summary = stripHtml(description).slice(0, 200);
+    const rawDescription = get("description");
+
+    // Correct order: extract → decode entities → strip HTML → truncate
+    const title = stripHtml(decodeHtmlEntities(rawTitle));
+    const summary = stripHtml(decodeHtmlEntities(rawDescription)).slice(0, 200);
 
     // Extract image via regex (no DOM in Node)
     let image: string | null = null;
-    const enclosureMatch = rawItem.match(/<enclosure[^>]+url=["']([^"']+)["'][^>]*type=["']image\/[^"']+["']/);
+    const enclosureMatch = rawItem.match(
+      /<enclosure[^>]+url=["']([^"']+)["'][^>]*type=["']image\/[^"']+["']/
+    );
     if (enclosureMatch) {
       image = enclosureMatch[1];
     } else {
@@ -116,16 +171,25 @@ export async function getSubstackPosts(): Promise<SubstackPost[]> {
       if (mediaMatch) {
         image = mediaMatch[1];
       } else {
-        const imgMatch = description.match(/<img[^>]+src=["']([^"']+)["']/);
+        const imgMatch = rawDescription.match(/<img[^>]+src=["']([^"']+)["']/);
         if (imgMatch) image = imgMatch[1];
       }
     }
 
-    const paywallKeywords = ["subscribe to read", "for paid subscribers", "abbonati", "subscribers only"];
-    const isPaywall = paywallKeywords.some((kw) => description.toLowerCase().includes(kw));
+    const paywallKeywords = [
+      "subscribe to read",
+      "for paid subscribers",
+      "abbonati",
+      "subscribers only",
+    ];
+    const isPaywall = paywallKeywords.some((kw) =>
+      rawDescription.toLowerCase().includes(kw)
+    );
 
     const slug = slugFromUrl(link);
-    const publishedAt = pubDate ? new Date(pubDate).toISOString() : new Date().toISOString();
+    const publishedAt = pubDate
+      ? new Date(pubDate).toISOString()
+      : new Date().toISOString();
 
     return {
       title,
