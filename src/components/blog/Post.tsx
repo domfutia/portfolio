@@ -13,13 +13,11 @@ interface PostProps {
 
 export default function Post({ post, thumbnail = false, direction }: PostProps) {
   return (
-    <Card
-      fillWidth
-      key={post.slug}
-      href={post.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      transition="micro-medium"
+<Card
+  fillWidth
+  key={post.slug}
+  href={`/blog/${post.slug}`}
+  transition="micro-medium"
       direction={direction}
       border="transparent"
       background="transparent"
