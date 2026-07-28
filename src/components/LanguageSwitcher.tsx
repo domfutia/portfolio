@@ -7,23 +7,15 @@ export function LanguageSwitcher() {
   const { locale, setLocale } = useLanguage();
 
   return (
-    <div className={styles.switcher} aria-label="Select language">
-      <button
-        type="button"
-        className={locale === "it" ? styles.active : styles.button}
-        onClick={() => setLocale("it")}
-        aria-pressed={locale === "it"}
+    <label className={styles.wrapper} aria-label="Select language">
+      <select
+        className={styles.select}
+        value={locale}
+        onChange={(e) => setLocale(e.target.value as "it" | "en")}
       >
-        IT
-      </button>
-      <button
-        type="button"
-        className={locale === "en" ? styles.active : styles.button}
-        onClick={() => setLocale("en")}
-        aria-pressed={locale === "en"}
-      >
-        EN
-      </button>
-    </div>
+        <option value="it">IT</option>
+        <option value="en">EN</option>
+      </select>
+    </label>
   );
 }
