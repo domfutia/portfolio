@@ -49,9 +49,7 @@ const home: Home = {
   label: "Home",
   title: `${person.name} — Philosophy, Phenomenology & Enactivism`,
   description: `Personal portfolio of ${person.name}. Master's Student in Philosophy with a focus on Phenomenology, Enactivism and Narrative Identity.`,
-  headline: {
-    "Studente Magistrale in Filosofia, con focus su Fenomenologia e Filosofia della Mente",
-  },
+  headline: "Studente Magistrale in Filosofia, con focus su Fenomenologia e Filosofia della Mente",
   headlineI18n: {
     it: "Studente Magistrale in Filosofia, con focus su Fenomenologia e Filosofia della Mente",
     en: "Master’s student in Philosophy, with a focus on Phenomenology and Philosophy of Mind",
@@ -69,9 +67,7 @@ const home: Home = {
     ),
     href: "/esn",
   },
-  subline: {
-    "Mi occupo del tema dell'identità all'interno delle scienze cognitive, attraverso la lente dell'enattivismo e della tradizione ermeneutica, con particolare interesse verso le teorie narrative dell'identità.",
-  },
+  subline: "Mi occupo del tema dell'identità all'interno delle scienze cognitive, attraverso la lente dell'enattivismo e della tradizione ermeneutica, con particolare interesse verso le teorie narrative dell'identità.",
   sublineI18n: {
     it: "Mi occupo del tema dell'identità all'interno delle scienze cognitive, attraverso la lente dell'enattivismo e della tradizione ermeneutica, con particolare interesse verso le teorie narrative dell'identità.",
     en: "My research focuses on the theme of identity within cognitive science, through the lens of enactivism and the hermeneutic tradition, with particular interest in narrative theories of identity.",
