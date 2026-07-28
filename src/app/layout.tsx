@@ -4,6 +4,8 @@ import "@/resources/custom.css";
 
 import classNames from "classnames";
 
+import { LanguageProvider } from "@/components/LanguageProvider";
+
 import {
   Background,
   Column,
@@ -104,6 +106,7 @@ export default async function RootLayout({
         />
       </head>
       <Providers>
+        <LanguageProvider>
         <Column
           as="body"
           background="page"
@@ -164,6 +167,7 @@ export default async function RootLayout({
           </Flex>
           <Footer />
         </Column>
+        </LanguageProvider>
       </Providers>
     </Flex>
   );
