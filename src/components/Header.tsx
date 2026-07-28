@@ -9,6 +9,8 @@ import { routes, display, person, about, esn, blog } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.scss";
 
+import { LanguageSwitcher } from "./LanguageSwitcher"; 
+
 type TimeDisplayProps = {
   timeZone: string;
   locale?: string; // Optionally allow locale, defaulting to 'en-GB'
@@ -150,6 +152,7 @@ export const Header = () => {
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />
+                  <LanguageSwitcher />
                   <ThemeToggle />
                 </>
               )}
