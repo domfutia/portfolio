@@ -7,8 +7,7 @@ export {
   about,
   esn,
   blog,
-  work,
-  gallery,
+  gallery,  // ← work rimosso
 } from "./content";
 
 export {
