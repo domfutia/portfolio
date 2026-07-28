@@ -152,8 +152,8 @@ export const Header = () => {
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />
-                  <LanguageSwitcher />
                   <ThemeToggle />
+                  <LanguageSwitcher />
                 </>
               )}
             </Row>

@@ -1,0 +1,36 @@
+.switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  background: var(--color-surface);
+}
+
+.button,
+.active {
+  min-height: 32px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: background-color 180ms ease, color 180ms ease, opacity 180ms ease;
+}
+
+.button {
+  color: var(--color-text-muted);
+  background: transparent;
+  opacity: 0.8;
+}
+
+.active {
+  color: var(--color-text);
+  background: var(--color-surface-offset);
+}
+
+.button:hover {
+  color: var(--color-text);
+  opacity: 1;
+}
