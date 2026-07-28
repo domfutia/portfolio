@@ -3,6 +3,8 @@ import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { baseURL, blog, person, newsletter } from "@/resources";
 
+export const revalidate = 21600; // ISR: rebuild every 6 hours
+
 export async function generateMetadata() {
   return Meta.generate({
     title: blog.title,
@@ -33,12 +35,15 @@ export default function Blog() {
         {blog.title}
       </Heading>
       <Column fillWidth flex={1} gap="40">
+        {/* Featured post (first) with thumbnail */}
         <Posts range={[1, 1]} thumbnail />
+        {/* Next 2 posts in 2-column grid */}
         <Posts range={[2, 3]} columns="2" thumbnail direction="column" />
         <Mailchimp marginBottom="l" />
         <Heading as="h2" variant="heading-strong-xl" marginLeft="l">
-          Earlier posts
+          Articoli precedenti
         </Heading>
+        {/* All remaining posts */}
         <Posts range={[4]} columns="2" />
       </Column>
     </Column>

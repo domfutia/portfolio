@@ -1,11 +1,11 @@
-import { About, Blog, Esn, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
+import { About, Blog, Esn, Gallery, Home, Newsletter, Person, Social } from "@/types";
 import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
   firstName: "Domenico",
   lastName: "Futia",
   name: `Domenico Futia`,
-  role: "Philosophy Student",
+  role: "Master's Student in Philosophy",
   avatar: "/images/avatar.jpg",
   email: "domenicofutia@hotmail.com",
   location: "Europe/Rome", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
@@ -47,9 +47,9 @@ const home: Home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work and experience as a ${person.role}`,
-  headline: <>Bridging philosophy and the world, one experience at a time</>,
+  title: `${person.name} — Philosophy, Phenomenology & Enactivism`,
+  description: `Personal portfolio of ${person.name}. Master's Student in Philosophy with a focus on Phenomenology, Enactivism and Narrative Identity.`,
+  headline: <>Studente Magistrale in Filosofia, con focus su Fenomenologia, Enattivismo e Identità</>,
   featured: {
     display: false,
     title: (
@@ -65,8 +65,7 @@ const home: Home = {
   },
   subline: (
     <>
-      I'm {person.firstName}, a {person.role.toLowerCase()} at{" "}
-      <Text as="span" size="xl" weight="strong">University of Pisa</Text>, where I explore identity, consciousness and the philosophy of mind. <br /> Alongside my studies, I work in tourism and volunteer with Erasmus Student Network.
+      Mi occupo del tema dell'identità all'interno delle scienze cognitive, attraverso la lente dell'enattivismo e della tradizione ermeneutica, con particolare interesse verso le teorie narrative dell'identità.
     </>
   ),
 };
@@ -92,10 +91,11 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        {person.firstName} is a philosophy student and tourism professional based in{" "}
-        {person.location.split("/")[1]?.replace("_", " ")}. Combining the analytical approach of
-        humanistic studies with pragmatism developed in the field, he tackles everyday challenges
-        with a broad perspective, mental flexibility and a fast learning ability.
+        {person.firstName} is a Master's student in Philosophy at the University of Pisa, where he
+        focuses on Phenomenology, Enactivism and the philosophy of mind. His research centres on
+        the theme of identity within the cognitive sciences, approached through the lens of
+        enactivism and the hermeneutic tradition, with a particular interest in narrative theories
+        of identity.
       </>
     ),
   },
@@ -267,15 +267,6 @@ const blog: Blog = {
   // All posts will be listed on the /blog route
 };
 
-const work: Work = {
-  path: "/work",
-  label: "Projects",
-  title: `Projects – ${person.name}`,
-  description: `Projects and writing by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
-  // All projects will be listed on the /home and /work routes
-};
-
 const gallery: Gallery = {
   path: "/gallery",
   label: "Gallery",
@@ -284,4 +275,4 @@ const gallery: Gallery = {
   images: [],
 };
 
-export { person, social, newsletter, home, about, esn, blog, work, gallery };
+export { person, social, newsletter, home, about, esn, blog, gallery };
