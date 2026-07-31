@@ -9,10 +9,6 @@ const person: Person = {
   avatar: "/images/avatar.jpg",
   email: "domenicofutia@hotmail.com",
   location: "Europe/Rome", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  locationI18n: {
-    it: "Pisa, Toscana, Italia",
-    en: "Pisa, Tuscany, Italy",
-  },
   languages: ["Italian", "English", "German", "Spanish"], // optional: Leave the array empty if you don't want to display languages
   locale: "en", // BCP 47 language tag for the HTML lang attribute, e.g., 'en', 'ja', 'zh-TW'
 };
