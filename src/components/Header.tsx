@@ -83,7 +83,8 @@ export const Header = () => {
             border="neutral-alpha-weak"
             radius="m-4"
             shadow="l"
-            padding="4"
+            paddingX="6"
+            paddingY="4"
             horizontal="center"
             zIndex={1}
           >
