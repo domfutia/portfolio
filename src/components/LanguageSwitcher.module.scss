@@ -26,3 +26,8 @@
   outline: none;
   box-shadow: none;
 }
+
+.select option {
+  background-color: var(--page-background);
+  color: var(--color-text);
+}
