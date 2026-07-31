@@ -93,6 +93,10 @@ const about: About = {
   intro: {
     display: true,
     title: "Introduction",
+    titleI18n: {
+      it: "Presentazione",
+      en: "Introduction",
+    },
     description: (
       <>
         {person.firstName} is a Master's student in Philosophy at the University of Pisa, where he
@@ -102,10 +106,34 @@ const about: About = {
         of identity.
       </>
     ),
+    descriptionI18n: {
+      it: (
+        <>
+          Domenico è uno studente magistrale in Filosofia presso l'Università di Pisa, dove si
+          concentra su Fenomenologia, Enattivismo e Filosofia della Mente. La sua ricerca verte
+          sul tema dell'identità nell'ambito delle scienze cognitive, attraverso la lente
+          dell'enattivismo e della tradizione ermeneutica, con un particolare interesse per le
+          teorie narrative dell'identità.
+        </>
+      ),
+      en: (
+        <>
+          {person.firstName} is a Master's student in Philosophy at the University of Pisa, where he
+          focuses on Phenomenology, Enactivism and the philosophy of mind. His research centres on
+          the theme of identity within the cognitive sciences, approached through the lens of
+          enactivism and the hermeneutic tradition, with a particular interest in narrative theories
+          of identity.
+        </>
+      ),
+    },
   },
   work: {
     display: true, // set to false to hide this section
     title: "Work Experience",
+    titleI18n: {
+      it: "Esperienza Lavorativa",
+      en: "Work Experience",
+    },
     experiences: [
       {
         company: "Global Cruises LLC",
@@ -143,6 +171,10 @@ const about: About = {
   studies: {
     display: true, // set to false to hide this section
     title: "Studies",
+    titleI18n: {
+      it: "Formazione",
+      en: "Studies",
+    },
     institutions: [
       {
         name: "University of Pisa — MSc in Philosophy and Forms of Knowledge",
@@ -179,6 +211,10 @@ const about: About = {
   technical: {
     display: true, // set to false to hide this section
     title: "Skills",
+    titleI18n: {
+      it: "Competenze",
+      en: "Skills",
+    },
     skills: [
       {
         title: "Communication & Public Speaking",
@@ -227,6 +263,10 @@ const esn: Esn = {
   intro: {
     display: true,
     title: "Introduction",
+    titleI18n: {
+      it: "Presentazione",
+      en: "Introduction",
+    },
     description: (
       <>
         {person.firstName} has been an active member of Erasmus Student Network Pisa - ETS since
@@ -235,10 +275,32 @@ const esn: Esn = {
         volunteering across Europe.
       </>
     ),
+    descriptionI18n: {
+      it: (
+        <>
+          Domenico è membro attivo di Erasmus Student Network Pisa - ETS dal febbraio 2025,
+          supportando gli studenti internazionali durante la loro esperienza di scambio e
+          contribuendo alla missione dell'associazione di promuovere lo scambio interculturale
+          e il volontariato in tutta Europa.
+        </>
+      ),
+      en: (
+        <>
+          {person.firstName} has been an active member of Erasmus Student Network Pisa - ETS since
+          February 2025, supporting international students throughout their exchange experience and
+          contributing to the association's mission of promoting intercultural exchange and
+          volunteering across Europe.
+        </>
+      ),
+    },
   },
   roles: {
     display: true,
     title: "Roles & Activities",
+    titleI18n: {
+      it: "Ruoli e Attività",
+      en: "Roles & Activities",
+    },
     items: [
       {
         organization: "Erasmus Student Network Pisa - ETS",

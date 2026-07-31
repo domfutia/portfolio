@@ -147,8 +147,12 @@ export interface About extends BasePageConfig {
     display: boolean;
     /** Title of the introduction section */
     title: string;
+    /** i18n titles for the introduction section */
+    titleI18n?: { it: string; en: string };
     /** Description of the introduction section */
     description: React.ReactNode;
+    /** i18n descriptions for the introduction section */
+    descriptionI18n?: { it: React.ReactNode; en: React.ReactNode };
   };
   /** Work experience section */
   work: {
@@ -156,6 +160,8 @@ export interface About extends BasePageConfig {
     display: boolean;
     /** Title for the work experience section */
     title: string;
+    /** i18n titles for the work experience section */
+    titleI18n?: { it: string; en: string };
     /** List of work experiences */
     experiences: Array<{
       /** Company name */
@@ -185,6 +191,8 @@ export interface About extends BasePageConfig {
     display: boolean;
     /** Title for the studies section */
     title: string;
+    /** i18n titles for the studies section */
+    titleI18n?: { it: string; en: string };
     /** List of institutions attended */
     institutions: Array<{
       /** Institution name */
@@ -201,6 +209,8 @@ export interface About extends BasePageConfig {
     display: boolean;
     /** Title for the technical skills section */
     title: string;
+    /** i18n titles for the technical skills section */
+    titleI18n?: { it: string; en: string };
     /** List of technical skills */
     skills: Array<{
       /** Skill title */
@@ -243,8 +253,12 @@ export interface Esn extends BasePageConfig {
     display: boolean;
     /** Title of the introduction section */
     title: string;
+    /** i18n titles for the introduction section */
+    titleI18n?: { it: string; en: string };
     /** Description of the introduction section */
     description: React.ReactNode;
+    /** i18n descriptions for the introduction section */
+    descriptionI18n?: { it: React.ReactNode; en: React.ReactNode };
   };
   /** Roles / activities section */
   roles: {
@@ -252,6 +266,8 @@ export interface Esn extends BasePageConfig {
     display: boolean;
     /** Title for the roles section */
     title: string;
+    /** i18n titles for the roles section */
+    titleI18n?: { it: string; en: string };
     /** List of roles/activities */
     items: Array<{
       /** Organization name */
