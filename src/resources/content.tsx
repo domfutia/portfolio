@@ -47,12 +47,12 @@ const home: Home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name} — Philosophy, Phenomenology & Enactivism`,
+  title: `Portfolio - Domenico Futia`,
   description: `Personal portfolio of ${person.name}. Master's Student in Philosophy with a focus on Phenomenology, Enactivism and Narrative Identity.`,
   headline: "Studente Magistrale in Filosofia, con focus su Fenomenologia e Filosofia della Mente",
   headlineI18n: {
     it: "Studente Magistrale in Filosofia, con focus su Fenomenologia e Filosofia della Mente",
-    en: "Master’s student in Philosophy, with a focus on Phenomenology and Philosophy of Mind",
+    en: "Master's student in Philosophy, with a focus on Phenomenology and Philosophy of Mind",
   },
   featured: {
     display: false,
